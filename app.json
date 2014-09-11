@@ -1,0 +1,7 @@
+{
+  "name": "Ghost",
+  "description": "Ghost On Heroku",
+  "repository": "https://github.com/thuriot/Ghost/",
+  "addons": ["heroku-postgresql", "mandrill"],
+  "keywords": [ "Ghost", "Blog", "Heroku" ]
+}
