@@ -3,7 +3,7 @@
   "description": "Ghost, just a blogging platform, On Heroku.",
   "logo": "https://raw.githubusercontent.com/TryGhost/Ghost/master/core/client/assets/img/large.png",
   "repository": "https://github.com/thuriot/Ghost/",
-  "addons": ["heroku-postgresql", "mandrill"],
+  "addons": ["heroku-postgresql", "mandrill", "pgbackups:auto-month"],
   "keywords": [ "Ghost", "Blog", "Heroku" ],
   "env": {
     "GHOST_URL": {
