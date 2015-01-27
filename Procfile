@@ -1,1 +1,1 @@
-web: node index.js --$NODE_ENV
+web: bin/start_nginx
