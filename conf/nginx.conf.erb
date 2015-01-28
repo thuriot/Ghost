@@ -30,7 +30,7 @@ http {
 
     server {
         listen       <%= ENV['PORT'] %>;
-        server_name  _;
+        server_name  <%= ENV['GHOST_URL'] %>;
 
         #charset koi8-r;
 
