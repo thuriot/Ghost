@@ -1,16 +1,20 @@
-worker_processes  <%= ENV['NGINX_WORKERS'] || 2 %>;
 daemon off;
+worker_processes  <%= ENV['NGINX_WORKERS'] || 2 %>;
 
 error_log  logs/error.log;
 
 events {
-    worker_connections 768;
+	use epoll;
+	accept_mutex on;
+	worker_connections 1024;
 }
 
 
 http {
     include       mime.types;
     default_type  application/octet-stream;
+    
+	server_tokens off;
 
     log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
                       '$status $body_bytes_sent "$http_referer" '
@@ -21,11 +25,13 @@ http {
     sendfile        on;
     keepalive_timeout  65;
 
-    #gzip  on;
+	gzip on;
+	gzip_comp_level 2;
+	gzip_min_length 512;
 
     upstream ghost {
-       server unix:/tmp/node.sock
-       fail_timeout=0;
+    	server unix:/tmp/node.sock
+		fail_timeout=0;
     }
 
     server {
@@ -38,11 +44,11 @@ http {
 
         location / {
 			proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header Host $http_host;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header Host $http_host;
 			proxy_set_header X-NginX-Proxy true;
-            proxy_redirect off;
-            proxy_pass http://ghost;
+			proxy_redirect off;
+			proxy_pass http://ghost;
         }
 
         location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|html|htm)$ {
@@ -50,11 +56,11 @@ http {
 			add_header Cache-Control "public";
 			
 			proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header Host $http_host;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header Host $http_host;
 			proxy_set_header X-NginX-Proxy true;
-            proxy_redirect off;
-            proxy_pass http://ghost;
+			proxy_redirect off;
+			proxy_pass http://ghost;
         }
     }
 }
