@@ -48,7 +48,7 @@ config = {
     // When running Ghost in the wild, use the production environment
     // Configure your URL and mail settings here
     production: {
-        url: process.env.GHOST_URL,
+        url: 'http://' + process.env.GHOST_URL,
         mail: {
             transport: 'SMTP',
             host: 'smtp.mandrillapp.com',
