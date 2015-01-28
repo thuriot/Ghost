@@ -1,10 +1,10 @@
-worker_processes  1;
+worker_processes  <%= ENV['NGINX_WORKERS'] || 2 %>;
 daemon off;
 
 error_log  logs/error.log;
 
 events {
-    worker_connections  1024;
+    worker_connections 768;
 }
 
 
