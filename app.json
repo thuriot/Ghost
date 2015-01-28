@@ -7,8 +7,8 @@
   "keywords": [ "Ghost", "Blog", "Heroku" ],
   "env": {
     "GHOST_URL": {
-      "description": "The URL of this blog which Ghost will be running on.",
-      "value": "http://YourUrl.com"
+      "description": "The URL of this blog which Ghost will be running on. (Without http://)",
+      "value": "www.YourUrl.com"
     },
     "NODE_ENV": {
       "description": "The NodeJS environment. (This shouldn't be altered)",
