@@ -73,34 +73,25 @@ http {
 			expires 1w; 
 			add_header Cache-Control "public";
 			
-			root content/images;
+			alias content/images;
 		}		 
 		location /assets {
 			expires 1y; 
 			add_header Cache-Control "public";
 			
-            if ($request_filename ~* ^.*?/([^/]*?)$)
-            {
-                set $filename $1; 
-            }
-
-            if ($filename ~* ^.*?\.(eot)|(ttf)|(woff)$){
-                add_header Access-Control-Allow-Origin *;
-            }
-			
-			root content/themes/orbs/assets;
+			alias content/themes/orbs/assets;
 		}		 
 		location /public {
 			expires 1y; 
 			add_header Cache-Control "public";
 			
-			root core/built/public;
+			alias core/built/public;
 		}		 
 		location /ghost/scripts {
 			expires 1w; 
 			add_header Cache-Control "public";
 			
-			root core/built/scripts;
+			alias core/built/scripts;
 		}
     }
 }
