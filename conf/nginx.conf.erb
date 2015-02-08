@@ -69,6 +69,10 @@ http {
 			proxy_pass http://ghost;
         }
 		
+		location ~* \.(eot|ttf|woff|svg)$ {
+			add_header Access-Control-Allow-Origin *;
+		}
+		
 		location /content/images {
 			expires 1w; 
 			add_header Cache-Control "public";
