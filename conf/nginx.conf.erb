@@ -69,10 +69,6 @@ http {
 			proxy_pass http://ghost;
         }
 		
-		location ~* \.(eot|ttf|woff|svg)$ {
-			add_header Access-Control-Allow-Origin *;
-		}
-		
 		location /content/images {
 			expires 1w; 
 			add_header Cache-Control "public";
@@ -82,6 +78,15 @@ http {
 		location /assets {
 			expires 1y; 
 			add_header Cache-Control "public";
+			
+            if ($request_filename ~* ^.*?/([^/]*?)$)
+            {
+                set $filename $1; 
+            }
+
+            if ($filename ~* ^.*?\.(eot)|(ttf)|(woff)$){
+                add_header Access-Control-Allow-Origin *;
+            }
 			
 			root content/themes/orbs/assets;
 		}		 
