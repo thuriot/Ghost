@@ -68,5 +68,30 @@ http {
 			proxy_redirect off;
 			proxy_pass http://ghost;
         }
+		
+		location /content/images {
+			expires 1w; 
+			add_header Cache-Control "public";
+			
+			root content/images;
+		}		 
+		location /assets {
+			expires 1y; 
+			add_header Cache-Control "public";
+			
+			root content/themes/orbs/assets;
+		}		 
+		location /public {
+			expires 1y; 
+			add_header Cache-Control "public";
+			
+			root core/built/public;
+		}		 
+		location /ghost/scripts {
+			expires 1w; 
+			add_header Cache-Control "public";
+			
+			root core/built/scripts;
+		}
     }
 }
