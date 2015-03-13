@@ -68,11 +68,11 @@ config = {
 		fileStorage: false,
         server: {
             // Host to be passed to node's `net.Server#listen()`
-            //host: '0.0.0.0',
+            host: '0.0.0.0',
             // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
-			//port: process.env.PORT			
+			port: process.env.PORT			
             // Socket to be passed to node's `net.Server#listen()`
-            socket: '/tmp/node.sock'
+            //socket: '/tmp/node.sock'
         }
     },
 
