@@ -81,7 +81,15 @@ config = {
         // Specify where your content directory lives
         paths: {
             contentPath: path.join(__dirname, '/content/')
-        }
+        },
+		pool: {
+			afterCreate: function (conn, done) {
+				conn.run('PRAGMA synchronous=OFF;' +
+				'PRAGMA journal_mode=MEMORY;' +
+				'PRAGMA locking_mode=EXCLUSIVE;' +
+				'BEGIN EXCLUSIVE; COMMIT;', done);
+			}
+		}
     },
 
     // **Developers only need to edit below here**
